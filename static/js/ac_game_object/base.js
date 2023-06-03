@@ -1,9 +1,10 @@
 let AC_GAME_OBJECTS = [];
+
 class AcGameObject {
     constructor() {
         AC_GAME_OBJECTS.push(this);
         this.timedelta = 0;
-        this.has_call_start = 0;
+        this.has_call_start = false;
     }
     start() {
 
@@ -11,6 +12,7 @@ class AcGameObject {
     update() {
 
     }
+
     destroy() {
         for (let i in AC_GAME_OBJECTS) {
             if (AC_GAME_OBJECTS[i] === this) {
@@ -18,6 +20,7 @@ class AcGameObject {
                 break;
             }
         }
+
     }
 }
 let last_timestamp;
@@ -31,6 +34,7 @@ let AC_GAME_OBJECTS_FRAME = (timestamp) => {
             obj.update();
         }
     }
+
     last_timestamp = timestamp;
     requestAnimationFrame(AC_GAME_OBJECTS_FRAME);
 }
@@ -38,3 +42,5 @@ let AC_GAME_OBJECTS_FRAME = (timestamp) => {
 requestAnimationFrame(AC_GAME_OBJECTS_FRAME);
 
 export { AcGameObject }
+
+

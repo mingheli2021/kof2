@@ -27,11 +27,59 @@ class Player extends AcGameObject {
     start() {
 
     }
+    update_move() {
+        this.vy += this.gravity;
+        this.x += this.vx * this.timedelta / 1000;
+        this.y += this.vy * this.timedelta / 1000;
+        if (this.y > 450) {
+            this.y = 450;
+            this.vy = 0;
+            if (this.status === 3) this.status = 0;
+        }
+    }
+    update_control() {
+        let a, w, d, space;
+        if (this.id === 0) {
+            a = this.pressed_keys.has('a');
+            w = this.pressed_keys.has('w');
+            d = this.pressed_keys.has('d');
+            space = this.pressed_keys.has(' ');
+        } else {
+            a = this.pressed_keys.has('ArrowLeft');
+            w = this.pressed_keys.has('ArrowUp');
+            d = this.pressed_keys.has('ArrowRight');
+            space = this.pressed_keys.has('Enter');
+        }
+        if (this.status === 0 || this.status === 1) {
+            if (w) {
+                if (d) {
+                    this.vx += this.speedx;
+                } else if (a) {
+                    this.vx -= this.speedx;
+                } else {
+                    this.vx = 0;
+                }
+                this.vy += this.speedy;
+                this.status = 3;
+            } else if (a) {
+                this.vx = -this.speedx;
+                this.status = 1;
+            } else if (d) {
+                this.vx = this.speedx;
+                this.status = 1;
+            } else {
+                this.status = 0;
+                this.vx = 0;
+            }
+        }
+
+    }
     update() {
+        this.update_control();
+        this.update_move();
         this.render();
     }
     render() {
-        let status = this.status;
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.width, this.height);
 
