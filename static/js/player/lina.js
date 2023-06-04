@@ -7,8 +7,8 @@ class Lina extends Player {
         this.init_animations();
     }
     init_animations() {
-        let offsets = [-25, -22, -22, -120, 0, 0, 0];
-        for (let i = 0; i < 7; i++) {
+        let offsets = [-25, -22, -22, -120, 0, 0, 0, -40];
+        for (let i = 0; i < 8; i++) {
             let gif = GIF();
             gif.load(`/static/images/player/lina/${i}.gif`);
             this.animations.set(i, {

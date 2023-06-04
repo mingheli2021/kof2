@@ -19,7 +19,7 @@ class Player extends AcGameObject {
         this.gravity = 50;
         this.ctx = this.root.game_map.ctx;
         this.pressed_keys = this.root.game_map.controller.pressed_keys;
-        this.status = 3;
+        this.status = 7;
         this.animations = new Map();
         this.frame_current_cnt = 0;
 
@@ -35,6 +35,14 @@ class Player extends AcGameObject {
             this.y = 450;
             this.vy = 0;
             if (this.status === 3) this.status = 0;
+            if (this.id === 0 && this.status === 7 && this.frame_current_cnt > 140) {
+                this.status = 0;
+                this.frame_current_cnt = 0;
+            }
+            if (this.id === 1 && this.status === 7 && this.frame_current_cnt > 185) {
+                this.status = 0;
+                this.frame_current_cnt = 0;
+            }
         }
         if (this.x < 0) {
             this.x = 0;

@@ -7,8 +7,8 @@ class Kyo extends Player {
         this.init_animations();
     }
     init_animations() {
-        let offsets = [0, -22, -22, -140, 0, 0, 0];
-        for (let i = 0; i < 7; i++) {
+        let offsets = [0, -22, -22, -140, 0, 0, 0, -130];
+        for (let i = 0; i < 8; i++) {
             let gif = GIF();
             gif.load(`/static/images/player/kyo/${i}.gif`);
             this.animations.set(i, {
