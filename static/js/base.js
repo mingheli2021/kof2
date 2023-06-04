@@ -1,5 +1,6 @@
 import { GameMap } from "./game_map/base.js";
 import { Kyo } from "./player/kyo.js";
+import { Lina } from "./player/lina.js";
 
 class KOF {
     constructor(id) {
@@ -14,7 +15,7 @@ class KOF {
                 height: 200,
                 color: 'blue'
             }),
-            new Kyo(this, {
+            new Lina(this, {
                 id: 1,
                 x: 900,
                 y: 0,

@@ -93,6 +93,7 @@ class Player extends AcGameObject {
         }
     }
     is_collision(r1, r2) {
+        console.log(r1.x1, r1.x2, r2.x1, r2.x2);
         if (Math.max(r1.x1, r2.x1) > Math.min(r1.x2, r2.x2)) {
             return false;
         }
@@ -108,32 +109,34 @@ class Player extends AcGameObject {
 
     }
     update_attack() {
-        if (this.status === 4 && this.frame_current_cnt === 18) {
+        if (this.status === 4) {
             let me = this, you = this.root.players[1 - this.id];
-            let r1;
-            if (this.direction > 0) {
-                r1 = {
-                    x1: me.x + 120,
-                    y1: me.y + 40,
-                    x2: me.x + 120 + 100,
-                    y2: me.y + 40 + 20
-                };
-            } else {
-                r1 = {
-                    x1: me.x + me.width - 120 - 100,
-                    y1: me.y + 40,
-                    x2: me.x + me.width - 120 - 100 + 100,
-                    y2: me.y + 40 + 20
+            if (this.frame_current_cnt === 18 && me.id === 0 || this.frame_current_cnt === 7 && me.id === 1) {
+                let r1;
+                if (this.direction > 0) {
+                    r1 = {
+                        x1: me.x + 120,
+                        y1: me.y + 40,
+                        x2: me.x + 120 + 100,
+                        y2: me.y + 40 + 20
+                    };
+                } else {
+                    r1 = {
+                        x1: me.x + me.width - 120 - 100,
+                        y1: me.y + 20,
+                        x2: me.x + me.width - 120 - 100 + 100,
+                        y2: me.y + 20 + 20
+                    }
                 }
-            }
-            let r2 = {
-                x1: you.x,
-                y1: you.y,
-                x2: you.x + you.width,
-                y2: you.y + you.height
-            };
-            if (this.is_collision(r1, r2)) {
-                you.is_attack();
+                let r2 = {
+                    x1: you.x,
+                    y1: you.y,
+                    x2: you.x + you.width,
+                    y2: you.y + you.height
+                };
+                if (this.is_collision(r1, r2)) {
+                    you.is_attack();
+                }
             }
         }
     }
