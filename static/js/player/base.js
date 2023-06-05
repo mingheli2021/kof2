@@ -22,6 +22,7 @@ class Player extends AcGameObject {
         this.status = 7;
         this.animations = new Map();
         this.frame_current_cnt = 0;
+        this.hp = 100;
 
     }
     start() {
@@ -114,6 +115,12 @@ class Player extends AcGameObject {
         if (this.status === 6) return;
         this.status = 5;
         this.frame_current_cnt = 0;
+        this.hp = Math.max(this.hp - 50, 0);
+        if (this.hp <= 0) {
+            this.status = 6;
+            this.frame_current_cnt = 0;
+            this.vx = 0;
+        }
 
     }
     update_attack() {
@@ -176,13 +183,18 @@ class Player extends AcGameObject {
             }
             this.frame_current_cnt++;
         }
-
-        if (status === 4 || status === 5 || status === 6) {
-            if (this.frame_current_cnt === obj.frame_rate * (obj.frame_cnt - 1)) {
-                if (status === 6) {
-                    this.frame_current_cnt--;
-                } else {
-                    this.status = 0;
+        if (status === 6 && this.id === 1) {
+            if (this.frame_current_cnt === 65) {
+                this.frame_current_cnt--;
+            }
+        } else {
+            if (status === 4 || status === 5 || status === 6) {
+                if (this.frame_current_cnt === obj.frame_rate * (obj.frame_cnt - 1)) {
+                    if (status === 6) {
+                        this.frame_current_cnt--;
+                    } else {
+                        this.status = 0;
+                    }
                 }
             }
         }
